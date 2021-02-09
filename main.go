@@ -10,6 +10,7 @@ import (
 	dht "github.com/libp2p/go-libp2p-kad-dht"
 	ma "github.com/multiformats/go-multiaddr"
 	noise "github.com/libp2p/go-libp2p-noise"
+	circuit "github.com/libp2p/go-libp2p-circuit"
 )
 
 func main() {
@@ -26,6 +27,7 @@ func main() {
 		libp2p.ListenAddrs(sourceMultiAddr),
 		libp2p.Security(noise.ID, noise.New),
 		libp2p.Identity(prvKey),
+		libp2p.EnableRelay(circuit.OptHop),
 	)
 	if err != nil {
 		panic(err)
