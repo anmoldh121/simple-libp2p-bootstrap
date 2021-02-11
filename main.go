@@ -10,8 +10,11 @@ import (
 	crypto "github.com/libp2p/go-libp2p-crypto"
 	dht "github.com/libp2p/go-libp2p-kad-dht"
 	noise "github.com/libp2p/go-libp2p-noise"
+
 	// ma "github.com/multiformats/go-multiaddr"
 	quic "github.com/libp2p/go-libp2p-quic-transport"
+	tcp "github.com/libp2p/go-tcp-transport"
+	libp2ptls "github.com/libp2p/go-libp2p-tls"
 )
 
 func main() {
@@ -28,6 +31,8 @@ func main() {
 		libp2p.ListenAddrStrings("/ip4/0.0.0.0/tcp/4000", "/ip4/0.0.0.0/udp/4000/quic"),
 		libp2p.Security(noise.ID, noise.New),
 		libp2p.Transport(quic.NewTransport),
+		libp2p.Transport(tcp.NewTCPTransport),
+		libp2p.Security(libp2ptls.ID, libp2ptls.New),
 		libp2p.Identity(prvKey),
 		libp2p.EnableRelay(circuit.OptHop),
 	)
