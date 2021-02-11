@@ -14,7 +14,7 @@ import (
 	crypto "github.com/libp2p/go-libp2p-crypto"
 	dht "github.com/libp2p/go-libp2p-kad-dht"
 	noise "github.com/libp2p/go-libp2p-noise"
-	// quic "github.com/libp2p/go-libp2p-quic-transport"
+	quic "github.com/libp2p/go-libp2p-quic-transport"
 	"github.com/libp2p/go-tcp-transport"
 	ma "github.com/multiformats/go-multiaddr"
 	// peer "github.com/libp2p/go-libp2p-core/peer"
@@ -52,7 +52,7 @@ func main() {
 	host, err := libp2p.New(
 		ctx,
 		libp2p.ListenAddrStrings("/ip4/0.0.0.0/tcp/4000", "/ip4/0.0.0.0/udp/4000/quic"),
-		// libp2p.Transport(quic.NewTransport),
+		libp2p.Transport(quic.NewTransport),
 		libp2p.Transport(tcp.NewTCPTransport),
 		libp2p.Security(noise.ID, noise.New),
 		libp2p.Identity(prvKey),
