@@ -15,7 +15,7 @@ import (
 
 func main() {
 	ctx := context.Background()
-	sourceMultiAddr, _ := ma.NewMultiaddr("/ip4/0.0.0.0/tcp/4000")
+	sourceMultiAddr, _ := ma.NewMultiaddr("/ip4/127.0.0.1/tcp/4000")
 
 	r := mrand.New(mrand.NewSource(int64(10)))
 	prvKey, _, err := crypto.GenerateKeyPairWithReader(crypto.RSA, 2048, r)
